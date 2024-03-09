@@ -11,11 +11,9 @@ resource "aws_cloudfront_origin_access_control" "crc_cf_oac" {
 
 resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
     origin {
-        s3_origin_config {
-            origin_access_identity = aws_cloudfront_origin_access_control.crc_cf_oac.id
-        }
-      domain_name = local.s3_origin_id
-      origin_id = local.s3_origin_id
+        origin_access_control_id = aws_cloudfront_origin_access_control.crc_cf_oac.id
+        domain_name = local.s3_origin_id
+        origin_id = local.s3_origin_id
     }
     
     enabled = true

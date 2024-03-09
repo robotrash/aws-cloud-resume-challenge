@@ -20,7 +20,6 @@ data "aws_iam_policy_document" "crc_bucket_policy" {
                 identifiers = ["cloudfront.amazonaws.com"]
         }
         resources = [
-            aws_s3_bucket.gjd_crc_prod_bucket.arn,
             "${aws_s3_bucket.gjd_crc_prod_bucket.arn}/*"
             ]
         condition {
