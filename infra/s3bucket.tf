@@ -29,3 +29,9 @@ data "aws_iam_policy_document" "crc_bucket_policy" {
         }
     }
 }
+
+resource "aws_s3_object" "website_files" {
+    bucket = aws_s3_bucket.gjd_crc_prod_bucket.id
+    source = "../website"
+    key = "new_object_key"
+}

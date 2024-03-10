@@ -30,7 +30,9 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
     }
 
     viewer_certificate {
-      cloudfront_default_certificate = true
+        acm_certificate_arn = "${aws_acm_certificate.crc_ssl_cert.arn}"
+        minimum_protocol_version = "TLSv1.2_2021"
+        ssl_support_method = "sni-only"
     }
 
     restrictions {
@@ -39,4 +41,7 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
           locations = []
         }
     }
+
+    depends_on = [ aws_acm_certificate.crc_ssl_cert ]
 }
+
