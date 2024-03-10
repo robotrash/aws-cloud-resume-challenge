@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
         domain_name = local.s3_origin_id
         origin_id = local.s3_origin_id
     }
-    
+    #aliases = [ "resume.robotra.sh","www.resume.robotra.sh" ]
     enabled = true
     is_ipv6_enabled = true
     default_root_object = "index.html"
@@ -30,10 +30,14 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
     }
 
     viewer_certificate {
+      cloudfront_default_certificate = true
+    }
+
+    /*viewer_certificate {
         acm_certificate_arn = "${aws_acm_certificate.crc_ssl_cert.arn}"
         minimum_protocol_version = "TLSv1.2_2021"
         ssl_support_method = "sni-only"
-    }
+    }*/
 
     restrictions {
         geo_restriction {
@@ -42,6 +46,6 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
         }
     }
 
-    depends_on = [ aws_acm_certificate.crc_ssl_cert ]
+    #depends_on = [ aws_acm_certificate.crc_ssl_cert ]
 }
 

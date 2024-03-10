@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "crc_ssl_cert" {
+/*resource "aws_acm_certificate" "crc_ssl_cert" {
     domain_name = "resume.robotra.sh"
     validation_method = "DNS"
     key_algorithm = "RSA_2048"
@@ -9,4 +9,4 @@ resource "aws_acm_certificate" "crc_ssl_cert" {
     tags = {
         project = "Cloud Resume Challenge"
     }
-}
+}*/

@@ -1,3 +1,8 @@
+module "template_files" {
+  source = "hashicorp/dir/template"
+  base_dir = "C:/Users/gregp/OneDrive/Documents/CloudResume/aws-cloud-resume-challenge/website"
+}
+
 resource "aws_s3_bucket" "gjd_crc_prod_bucket"{
     bucket = "gjd-crc-prod-bucket"
     tags = {
@@ -11,6 +16,8 @@ resource "aws_s3_bucket_policy" "crc_bucket_policy"{
 }
 
 data "aws_iam_policy_document" "crc_bucket_policy" {
+    version = "2008-10-17"
+    #id = "PolicyForCloudFrontPrivateContent"
     statement {
         actions = ["s3:GetObject"]
         effect = "Allow"
@@ -31,7 +38,14 @@ data "aws_iam_policy_document" "crc_bucket_policy" {
 }
 
 resource "aws_s3_object" "website_files" {
-    bucket = aws_s3_bucket.gjd_crc_prod_bucket.id
-    source = "../website"
-    key = "new_object_key"
+  for_each = module.template_files.files
+
+  bucket       = aws_s3_bucket.gjd_crc_prod_bucket.id
+  key          = each.key
+  content_type = each.value.content_type
+
+  source  = each.value.source_path
+  content = each.value.content
+
+  #etag = each.value.digests.md5
 }
