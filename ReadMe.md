@@ -6,8 +6,6 @@ I utilized a domain I previously purchased from [Porkbun](https://porkbun.com/) 
 The frontend website is a modified template from HTML5UP: https://html5up.net/prologue.
 <br><br>
 In the footer of the resume page is a view counter that utilizes DynamoDB and a lambda function (written in Python 3.12) to track site views. The lambda URL is public but is restricted to calls from my URL (https://resume.robotra.sh) via CORS. The function URL is called via the counter.js file and an HTML class in index.html.
-<br><br>
-The ideal future for the page view counter is to cache encrypted IPs and track views for unique visits.
 <H3>AWS</H3>
 In AWS I've utilized the following services:
 
