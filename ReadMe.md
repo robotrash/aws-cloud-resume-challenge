@@ -33,4 +33,4 @@ The following services have been automated with Terraform:
 
 - Create DynamoDB instance and populate using Terraform
 - Modify page view counter to log hashed IPs and track unique views only.
-- Expand on this README file : )
+- Expand on this README : )
