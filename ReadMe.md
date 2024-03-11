@@ -12,7 +12,7 @@ In AWS I've utilized the following services:
 - **Organizations/IAM Identity Center:** I utilize prod and test accounts with IAM MFA access to manage my environment
 - **S3 bucket:** NOT set as a static website and NO public access granted
 - **CloudFront:** Handles the serving of private content from the S3 bucket
-- **Certificate Manager:** Creates an SSL cert for the site, utilized by CloudFront
+- **Certificate Manager:** Creates an SSL cert for the site, utilized by CloudFront (currently commented out as cert creation and requests delay testing significantly)
 - **Lambda:** Houses the Python 3.12 script that updates the db in DynamoDB
 - **DynamoDB:** Houses the current page view count
 
