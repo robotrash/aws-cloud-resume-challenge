@@ -26,6 +26,7 @@ The following services have been automated with Terraform:
     - Caching behavior
     - Origin
 - [Certificate Manager](/infra/certificaterequest.tf)
+    - Commented out temporarily to ease deploy/test time
     - SSL cert generated 
 - [Lambda function](/infra/lambda.tf)
     - Accompanying [func.py](/infra/lambda/func.py) file packaged and uploaded as Lambda function
