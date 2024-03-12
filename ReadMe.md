@@ -21,6 +21,7 @@ The following services have been automated with Terraform:
 
 - [S3 Bucket](/infra/s3bucket.tf)
     - CloudFront access permissions
+    - Website contents uploaded with correct MIME types associated
 - [CloudFront Distribution](/infra/cloudfront.tf)
     - OAC
     - Caching behavior
