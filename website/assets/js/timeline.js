@@ -1,71 +1,36 @@
-(function ($) {
-    $(function () {
-
-
-        $(window).on('scroll', function () {
-            fnOnScroll();
-        });
-
-        $(window).on('resize', function () {
-            fnOnResize();
-        });
-
-
-        var agTimeline = $('.js-timeline'),
-            agTimelineLine = $('.js-timeline_line'),
-            agTimelineLineProgress = $('.js-timeline_line-progress'),
-            agTimelinePoint = $('.js-timeline-card_point-box'),
-            agTimelineItem = $('.js-timeline_item'),
-            agOuterHeight = $(window).outerHeight(),
-            agHeight = $(window).height(),
-            f = -1,
-            agFlag = false;
-
-        function fnOnScroll() {
-            agPosY = $(window).scrollTop();
-
-            fnUpdateFrame();
+(function () {
+    "use strict";
+  
+    // define variables
+    var items = document.querySelectorAll(".timeline li");
+  
+    // check if an element is in viewport
+    // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+    function isElementInViewport(el) {
+      var rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+  
+    function callbackFunc() {
+      for (var i = 0; i < items.length; i++) {
+        if (isElementInViewport(items[i])) {
+          items[i].classList.add("in-view");
         }
-
-        function fnOnResize() {
-            agPosY = $(window).scrollTop();
-            agHeight = $(window).height();
-
-            fnUpdateFrame();
+        else {
+            items[i].classList.remove("in-view");
         }
-
-        function fnUpdateWindow() {
-            agFlag = false;
-
-            agTimelineLine.css({
-                top: agTimelineItem.first().find(agTimelinePoint).offset().top - agTimelineItem.first().offset().top,
-                bottom: agTimeline.offset().top + agTimeline.outerHeight() - agTimelineItem.last().find(agTimelinePoint).offset().top
-            });
-
-            f !== agPosY && (f = agPosY, agHeight, fnUpdateProgress());
-        }
-
-        function fnUpdateProgress() {
-            var agTop = agTimelineItem.last().find(agTimelinePoint).offset().top;
-
-            i = agTop + agPosY - $(window).scrollTop();
-            a = agTimelineLineProgress.offset().top + agPosY - $(window).scrollTop();
-            n = agPosY - a + agOuterHeight / 2;
-            i <= agPosY + agOuterHeight / 2 && (n = i - a);
-            agTimelineLineProgress.css({ height: n + "px" });
-
-            agTimelineItem.each(function () {
-                var agTop = $(this).find(agTimelinePoint).offset().top;
-
-                (agTop + agPosY - $(window).scrollTop()) < agPosY + .5 * agOuterHeight ? $(this).addClass('js-ag-active') : $(this).removeClass('js-ag-active');
-            })
-        }
-
-        function fnUpdateFrame() {
-            agFlag || requestAnimationFrame(fnUpdateWindow);
-            agFlag = true;
-        }
-
-
-    });
-})(jQuery);
+      }
+    }
+  
+    // listen for events
+    window.addEventListener("load", callbackFunc);
+    window.addEventListener("resize", callbackFunc);
+    window.addEventListener("scroll", callbackFunc);
+  })();
+  
