@@ -53,11 +53,6 @@ h1 {
 }
 
 .timeline ul li:first-child {
-    list-style-type: none;
-    position: relative;
-    width: 6px;
-    margin: 0 auto;
-    padding-top: 50px;
     background: linear-gradient(0deg,#7c7c7c,transparent);
 }
 
