@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "crc_ssl_cert" {
     domain_name = "resume.robotra.sh"
-    validation_method = "DNS"
+    validation_method = "EMAIL"
     key_algorithm = "RSA_2048"
     subject_alternative_names = ["www.resume.robotra.sh"]
     lifecycle {
