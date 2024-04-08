@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "crc_prod_cfdist" {
         domain_name = local.s3_origin_id
         origin_id = local.s3_origin_id
     }
-    #aliases = [ "resume.robotra.sh","www.resume.robotra.sh" ]
+    aliases = [ "resume.robotra.sh","www.resume.robotra.sh" ]
     enabled = true
     is_ipv6_enabled = true
     default_root_object = "index.html"
