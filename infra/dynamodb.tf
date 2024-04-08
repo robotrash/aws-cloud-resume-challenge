@@ -2,10 +2,10 @@ resource "aws_dynamodb_table" "crc_viewcount_db" {
   name           = "crc-viewcount-db"
   read_capacity  = 1
   write_capacity = 1
-  hash_key       = "Id"
+  hash_key       = "id"
 
   attribute {
-    name = "Id"
+    name = "id"
     type = "S"
   }
 
@@ -20,7 +20,7 @@ resource "aws_dynamodb_table_item" "crc_viewcount_item" {
 
   item = <<ITEM
   {
-    "Id": {"S": "ViewCount"},
+    "id": {"S": "1"},
     "views": { "N": "23"}
   }
   ITEM
