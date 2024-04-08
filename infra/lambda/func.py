@@ -1,7 +1,7 @@
 import json
 import boto3
-dynamodb = boto3.resource('crc-viewcount-db')
-table = dynamodb.Table('cloudresume-test')
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('crc-viewcount-db')
 def lambda_handler(event, context):
     response = table.get_item(Key={
         'id':'1'
