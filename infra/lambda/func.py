@@ -6,7 +6,7 @@ def lambda_handler(event, context):
     response = table.get_item(Key={
         'id':'1'
     })
-    views = response['Item']['views']
+    views = response['Item']['ViewCount']
     views = views + 1
     print(views)
     response = table.put_item(Item={
