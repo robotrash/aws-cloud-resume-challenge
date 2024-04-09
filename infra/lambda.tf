@@ -25,23 +25,51 @@ resource "aws_iam_role" "crc_lambda_iam" {
     name = "crc_lambda_iam"
 
     assume_role_policy = jsonencode({
-        Version = "2012-10-17"
-        Statement = [
+        Version: "2012-10-17",
+        Statement: [
             {
-                Action = "sts:AssumeRole"
-                Effect = "Allow"
-                Sid = ""
-                Principal = {
-                    Service = "lambda.amazonaws.com"
-                }
-            },
+                Effect: "Allow",
+                Principal: {
+                    Service: "lambda.amazonaws.com"
+                },
+                Action: "sts:AssumeRole"
+            }
         ]
     })
 
+    managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
+    
     tags = {
         project = "Cloud Resume Challenge"
     }
 }
+
+/*resource "aws_iam_policy" "lambda_default" {
+    name = "policy-lambdadefault"
+
+    policy = jsonencode({
+        Version: "2012-10-17",
+        Statement: [
+            {
+                Effect: "Allow",
+                Action: "logs:CreateLogGroup",
+                Resource: "arn:aws:logs:us-east-1:637423291027:*"
+            },
+            {
+                Effect: "Allow",
+                Action: [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                ],
+                Resource: [
+                    aws_lambda_function.crc_lambda_func.arn
+                ]
+            }
+        ]
+    })
+}*/
+
+
 
 data "archive_file" "zip" {
     type = "zip"
