@@ -13,7 +13,7 @@ resource "aws_lambda_function_url" "crc_lambda_url"{
 
     cors {
         allow_credentials = true
-        allow_origins = ["https://resume.robotra.sh"]
+        allow_origins = ["https://resume.robotra.sh","https://www.resume.robotra.sh"]
         allow_methods = ["*"]
         allow_headers = ["date","keep-alive"]
         expose_headers = ["keep-alive","date"]
